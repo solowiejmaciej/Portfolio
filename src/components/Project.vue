@@ -1,5 +1,5 @@
 <template>
-    <div class="card" @click="openModal">
+    <div class="card fade-in" @click="openModal">
         <h1 class="card-title">{{ title }} {{ icon }}</h1>
         <ul>
             <li v-for="(technology, index) in technologies" :key="index">
@@ -100,6 +100,19 @@ export default {
 </script>
 
 <style scoped>
+
+.card.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 .card {
     color: #333; /* Dark grey color for text */
     background-color: #f9f9f9; /* Light grey color for background */
