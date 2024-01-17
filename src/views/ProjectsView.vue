@@ -8,15 +8,18 @@
     </select>
     <button @click="clearFilters">Clear filters</button>
     </div>
+
     <div class="projects-container">
+     <Spinner v-if="isLoading" />
         <Project 
             v-for="project in filteredProjects" 
+            v-if="!isLoading"  
             :key="project.title" 
             :title="project.title" 
             :description="project.description" 
-            :url="project.url" 
-            :creationDate="project.creationDate" 
-            :icon="project.icon" 
+            :url="project.gitHubUrl" 
+            :creationDate="project.createdAt" 
+            :icon="IconsMap[project.icon]" 
             :isLive="project.isLive" 
             :liveUrl="project.liveUrl" 
             :technologies="project.technologies"
@@ -28,19 +31,37 @@
 
 <script>
 import Project from '../components/Project.vue'
-import ProjectsList from '../constants/ProjectList.js'
+import ProjectList from '../constants/ProjectList.js'
 import TagsList from '../constants/TagsList.js'
+import IconsMap from '../constants/IconsMap'
+import Spinner from '../components/Spinner.vue'
 
-export default {
+export default  {
     components: {
-        Project
-    },
+        Project,
+        Spinner
+       },
     data() {
         return {
-            ProjectsList: ProjectsList,
+            isLoading: true,  // set isLoading to true initially
+            ProjectsList: [],
             selectedTag: '',
-            Tags: TagsList
+            Tags: TagsList,
+            IconsMap: IconsMap,
         };
+    },
+    created() {
+        fetch('https://projects-api.solowiejmaciej.com/projects')
+            .then(response => response.json())
+            .then(data => {
+                this.ProjectsList = data;
+                this.isLoading = false;  // Add this line
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                this.isLoading = false;  // Add this line
+                this.ProjectsList = ProjectList;
+            });
     },
     computed: {
         filteredProjects() {
@@ -60,23 +81,19 @@ export default {
 </script>
 
 <style scoped>
+
 .projects-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 20px;
+    position: relative; 
+
 }
 
 .projects-container > div {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    width: calc(33% - 20px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
     align-items: stretch;
+
 }
 
 select, button {
@@ -102,4 +119,5 @@ button:hover {
     justify-content: center;
     gap: 20px;
 }
+
 </style>
