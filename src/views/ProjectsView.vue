@@ -51,7 +51,7 @@ export default  {
         };
     },
     created() {
-        fetch('http://192.168.1.138:3000/projects')
+        fetch('https://projects-api.solowiejmaciej.com/projects')
             .then(response => response.json())
             .then(data => {
                 this.ProjectsList = data;

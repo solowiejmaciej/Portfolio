@@ -40,7 +40,7 @@ export default {
   const fetchTemp = async () => {
   loadingTemp.value = true
   try {
-    const response = await axios.get('http://192.168.1.138:5000/Temperature')
+    const response = await axios.get('https://hms.solowiejmaciej.com/Temperature')
     temp.value = parseFloat(response.data.temperature).toFixed(2)
   } catch (error) {
     console.error(error)
