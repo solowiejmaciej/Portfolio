@@ -1,13 +1,9 @@
 <template>
     <div class="about-container">
+        <h1 id="typed"></h1>
         <img class="profile-picture" src="../assets/profilepic.png" alt="Profile Picture">
-        <h1 class="name">Maciej Sołowiej</h1>
-        <p class="bio">
-            I'm a Junior FullStack Developer with a passion for learning new things and solving problems.
-            My main focus is on .NET and Vue.js, but I'm always open to new technologies.
-            I love to work in a team and I'm always eager to learn from more experienced developers.
-            I aspecialy enjoy working on the backend side of things, but I'm also comfortable with frontend, but css is a nightmare.
-        </p>
+        <h1 id="typed-name" class="name"></h1>
+        <p class="bio">I'm a Junior FullStack Developer with a passion for learning new things and solving problems. My main focus is on .NET and Vue.js, but I'm always open to new technologies. I love to work in a team and I'm always eager to learn from more experienced developers. I especially enjoy working on the backend side of things, but I'm also comfortable with frontend, but CSS is a nightmare.</p>
         <div class="social-media-links">
         <a href="https://github.com/solowiejmaciej" target="_blank">
             <i class="fab fa-github"></i> GitHub
@@ -19,6 +15,40 @@
     </div>
     </div>
 </template>
+
+<script>
+import Typed from 'typed.js';
+
+export default {
+    mounted() {
+        new Typed('#typed-name', {
+            strings: ["Maciej Sołowiej"],
+            typeSpeed: 50,
+            backSpeed: 50,
+            loop: false,
+            showCursor: false
+    });
+    const hour = new Date().getHours();
+        let greeting;
+        if (hour < 12) {
+            greeting = 'Good Morning!';
+        } else if (hour < 18) {
+            greeting = 'Good Afternoon!';
+        } else {
+            greeting = 'Good Evening!';
+        }
+
+        new Typed('#typed', {
+            strings: [greeting],
+            typeSpeed: 50,
+            backSpeed: 50,
+            loop: false,
+            showCursor: false
+
+        });
+    }
+};
+</script>
 
 <style scoped>
 .about-container {
@@ -115,8 +145,16 @@
     transition-delay: 0.9s;
 }
 
+.about-container{
+    padding: 0;
+}
+
 .about-container:hover .name, .about-container:hover .bio, .about-container:hover .social-media-links a {
     transform: translateY(0);
     opacity: 1;
+}
+
+h1 {
+    font-size: 36px;
 }
 </style>

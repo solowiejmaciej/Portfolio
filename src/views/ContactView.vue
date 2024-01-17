@@ -1,7 +1,7 @@
 <template>
     <div class="contact-view">
         <h1>Contact</h1>
-        <form @submit.prevent>
+        <form @submit.prevent class="animated-form">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" v-model="name" />
@@ -32,9 +32,24 @@ export default {
 </script>
 
 <style scoped>
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.animated-form {
+    animation: fadeIn 1s;
+}
 .contact-view {
     max-width: 500px;
     margin: 0 auto;
+    padding: 0 20px; /* Add some padding on smaller screens */
+}
+
+@media (max-width: 600px) {
+    .contact-view {
+        max-width: 100%; /* Allow the form to take up the full width on smaller screens */
+    }
 }
 
 .form-group {

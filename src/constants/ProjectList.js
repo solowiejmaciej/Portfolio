@@ -7,9 +7,9 @@ const projects = [
         creationDate: '18.11.2023',
         icon: '🩸',
         isLive: false,
-        technologies : ['.NET', 'Vue.js', 'Azure', 'Docker', 'RabbitMQ', 'Redis', 'SQL Server'],
+        technologies : ['.NET', 'Azure', 'Docker', 'RabbitMQ', 'Redis', 'SQL Server'],
         images: [],
-        tags: ['Backend', 'API']
+        tags: ['#backend', '#api']
     },
     {
         title: 'HomeManagementService',
@@ -21,18 +21,18 @@ const projects = [
         liveUrl: 'https://hms.solowiejmaciej.com/swagger/index.html',
         technologies : ['.NET', 'Azure', 'Docker', 'RabbitMQ', 'Redis', 'Mqtt', 'SQL Server'],
         images: [],
-        tags: ['Backend', 'API']
+        tags: ['#backend', '#api']
     },
     {
         title: 'ExampleSystem',
         description: 'This is a example system based on events and microservices. It is a simple system for managing users and their data. It is based on the CQRS pattern and the Mediator pattern, it uses RabbitMQ to communicate between services. It also uses Redis to cache data. Users can be created, updated, and deleted. It is a simple system that I created to learn more about microservices and event driven architecture.',
         url: 'https://www.google.com',
-        creationDate: '03.04-2023',
+        creationDate: '03.04.2023',
         icon: '💻',
         isLive: false,
         technologies : ['.NET', 'RabbitMQ', 'Redis', 'SQL Server', 'Firebase'],
         images: [],
-        tags: ['Backend', 'API', 'Microservices']
+        tags: ['#backend', '#api', '#microservices']
     },
     {
         title:'SmartKnob',
@@ -43,7 +43,7 @@ const projects = [
         isLive: false,
         technologies : ['Esp32', 'Mqtt', 'C++'],
         images: ['https://i.imgur.com/U5KOut6.jpg', 'https://i.imgur.com/SMTS8Hz.png'],
-        tags: ['Hardware']
+        tags: ['#hardware']
     },
     {
         title: 'SmartWeatherStation',
@@ -54,8 +54,20 @@ const projects = [
         isLive: false,
         technologies : ['Esp32', 'Mqtt', 'C++'],
         images: ['https://i.imgur.com/9JWkqB7.jpeg','https://i.imgur.com/0jDzREd.png'],
-        tags: ['Hardware']
+        tags: ['#hardware']
 
+    },
+    {
+        title: 'Portfolio',
+        description: 'This is my portfolio website. It is a simple website that I created to showcase my projects. It is based on Vue.js, it it uses Vue Router to navigate between pages. You are currently on this website.',
+        url: 'https://github.com/solowiejmaciej/Portfolio',
+        creationDate: '17.01.2024',
+        icon: '💼',
+        isLive: true,
+        liveUrl: 'https://solowiejmaciej.com',
+        technologies : ['Vue.js'],
+        images: [],
+        tags: ['#frontend']
     }
 ];
 

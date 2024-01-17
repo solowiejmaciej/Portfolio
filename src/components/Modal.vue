@@ -6,8 +6,7 @@
       <p>GitHub URL: <a :href="url" target="_blank">{{ url }}</a></p>
       <p v-if="isLive">Live URL: <a :href="liveUrl">{{ liveUrl }}</a></p>
       <h4>{{ description }}</h4>
-      <img v-for="(image, index) in images" :key="index" :src="image" />
-    </div>
+      <img class="modal-image" v-for="(image, index) in images" :key="index" :src="image" />    </div>
   </div>
 </template>
 
@@ -88,8 +87,9 @@ export default {
     font-size: 2em;
     cursor: pointer;
 }
-img {
+
+.modal-image {
     width: 40%;
-    height: 65%;
+    height: auto;
 }
 </style>

@@ -1,9 +1,8 @@
 <template>
     <div>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/projects">Projects</RouterLink>
-        <RouterLink to="/contact">Contact</RouterLink>
+        <RouterLink to="/" active-class="active"><font-awesome-icon icon="user" /> About</RouterLink>
+        <RouterLink to="/projects" active-class="active"><font-awesome-icon icon="code-branch" /> Projects</RouterLink>
+        <RouterLink to="/contact" active-class="active"><font-awesome-icon icon="envelope-open" /> Contact</RouterLink>
     </div>
 </template>
 
@@ -27,7 +26,7 @@ export default {
         color: white;
         text-decoration: none;
     }
-    a:hover {
-        color: #61dafb;
+    a:hover, .active {
+        color: #007bff;
     }
 </style>
