@@ -24,45 +24,43 @@
         </form>
         <p v-if="showMessage" class="success-message">Thank you for contact, I will respond as soon as I can!</p>
     </div>
+    <FunFact />
 </template>
 <script>
 import { ref } from 'vue'
 import { required, maxLength, minLength, email } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
+import FunFact from '../components/FunFact.vue'
 
 export default {
-  setup() {
-    const name = ref('')
-    const fieldEmail = ref('')
-    const message = ref('')
-    const showMessage = ref(false) 
-
-    const rules = {
-      name: { required, maxLength: maxLength(50), minLength: minLength(2) },
-      fieldEmail: { required, email },
-      message: { required, maxLength: maxLength(400), minLength: minLength(10)}
-    }
-
-    const v$ = useVuelidate(rules, { name, fieldEmail, message })
-
-    const submitForm = () => {
-    v$.value.$touch()
-    if (v$.value.$invalid) {
-        // Form is invalid, do not submit it
-        return
-    }
-
-    showMessage.value = true // Set showMessage to true after successful submission
-
-    // Reset the form and validation state
-    name.value = ''
-    fieldEmail.value = ''
-    message.value = ''
-    v$.value.$reset()
-    }
-
-    return { name, fieldEmail, message, v$, submitForm, showMessage }
-  }
+    components: { FunFact },
+    setup() {
+        
+        const name = ref('');
+        const fieldEmail = ref('');
+        const message = ref('');
+        const showMessage = ref(false);
+        const rules = {
+            name: { required, maxLength: maxLength(50), minLength: minLength(2) },
+            fieldEmail: { required, email },
+            message: { required, maxLength: maxLength(400), minLength: minLength(10) }
+        };
+        const v$ = useVuelidate(rules, { name, fieldEmail, message });
+        const submitForm = () => {
+            v$.value.$touch();
+            if (v$.value.$invalid) {
+                // Form is invalid, do not submit it
+                return;
+            }
+            showMessage.value = true; // Set showMessage to true after successful submission
+            // Reset the form and validation state
+            name.value = '';
+            fieldEmail.value = '';
+            message.value = '';
+            v$.value.$reset();
+        };
+        return { name, fieldEmail, message, v$, submitForm, showMessage };
+    },
 }
 </script>
 
