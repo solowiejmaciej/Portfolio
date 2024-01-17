@@ -1,34 +1,45 @@
 <template>
+<div class="content">
     <div class="about-container">
         <h1 id="typed"></h1>
         <img class="profile-picture" src="../assets/profilepic.png" alt="Profile Picture">
         <h1 id="typed-name" class="name"></h1>
         <p class="bio">I'm a Junior FullStack Developer with a passion for learning new things and solving problems. My main focus is on .NET and Vue.js, but I'm always open to new technologies. I love to work in a team and I'm always eager to learn from more experienced developers. I especially enjoy working on the backend side of things, but I'm also comfortable with frontend, but CSS is a nightmare.</p>
         <div class="social-media-links">
-        <a href="https://github.com/solowiejmaciej" target="_blank">
-            <i class="fab fa-github"></i> GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/maciej-so%C5%82owiej-9bbb85235/" target="_blank">
-            <i class="fab fa-linkedin"></i> LinkedIn
-        </a>
-        <!-- Add more links as needed -->
+            <a href="https://github.com/solowiejmaciej" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/maciej-so%C5%82owiej-9bbb85235/" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            </div>
     </div>
-    </div>
+    <div class="timeline-container slide-in-right">
+                <WorkHistoryTimeLine/>
+        </div>
+</div>
+
 </template>
 
 <script>
 import Typed from 'typed.js';
+import WorkHistoryTimeLine from '../components/WorkHistoryTimeLine.vue';
 
 export default {
+    name: 'AboutView',
+    components: {
+        WorkHistoryTimeLine
+    },
     mounted() {
         new Typed('#typed-name', {
             strings: ["Maciej Sołowiej"],
             typeSpeed: 50,
             backSpeed: 50,
             loop: false,
-            showCursor: false
-    });
-    const hour = new Date().getHours();
+            showCursor: false,
+        });
+
+        const hour = new Date().getHours();
         let greeting;
         if (hour < 12) {
             greeting = 'Good Morning!';
@@ -44,13 +55,54 @@ export default {
             backSpeed: 50,
             loop: false,
             showCursor: false
-
         });
     }
 };
 </script>
 
+
 <style scoped>
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-right {
+    animation: slide-in-right 1s ease-out forwards;
+}
+.timeline-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.about-container, .timeline-container {
+    flex: 1;
+    margin-bottom: 20px;  /* Add some space between the elements */
+}
+
+@media (min-width: 768px) {
+    .content {
+        flex-direction: row;
+    }
+
+    .about-container {
+        margin-right: 20px;  /* Add some space between the elements */
+        margin-bottom: 0;
+    }
+}
 .about-container {
     display: flex;
     flex-direction: column;

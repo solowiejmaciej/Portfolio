@@ -11,22 +11,26 @@ export default {
     name: 'NavBar',
 }
 </script>
-
 <style scoped>
     div {
         top: 0;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        background-color: #282c34;
+        background-color: #2d2d2d;
         color: white;
         height: 10vh;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Add a shadow to the navbar */
     }
     a {
         color: white;
         text-decoration: none;
+        padding: 15px 30px; /* Increase the padding */
+        font-size: 1.2em; /* Increase the font size */
+        transition: color 0.3s ease, border-bottom 0.3s ease; /* Add a transition effect */
     }
     a:hover, .active {
-        color: #007bff;
+        color: #007bff; /* Change the color on hover */
+        border-bottom: 2px solid #007bff; /* Add an underline on hover */
     }
 </style>

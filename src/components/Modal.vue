@@ -1,14 +1,23 @@
 <template>
-  <div class="backdrop">
-    <div class="myModal">
-      <button class="close-button" @click="closeModal"> &times; </button>
-      <h1>{{ title }}</h1>
-      <p>GitHub URL: <a :href="url" target="_blank">{{ url }}</a></p>
-      <p v-if="isLive">Live URL: <a :href="liveUrl">{{ liveUrl }}</a></p>
-      <h4>{{ description }}</h4>
-      <img class="modal-image" v-for="(image, index) in images" :key="index" :src="image" />    </div>
-  </div>
-</template>
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close-button" @click="$emit('closeModal')">&times;</span>
+        
+        <h2 class="modal-title">{{ title }}</h2>
+        
+        <div class="modal-images">
+          <img class="modal-image" v-for="(image, index) in images" :key="index" :src="image" />
+        </div>
+        
+        <p class="modal-description">{{ description }}</p>
+        
+        <div class="modal-links">
+          <a :href="url" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+          <a v-if="isLive" :href="liveUrl" target="_blank" rel="noopener noreferrer">View Live Site</a>
+        </div>
+      </div>
+    </div>
+  </template>
 
 <script>
 export default {
@@ -55,41 +64,77 @@ export default {
 </script>
 
 <style scoped>
-.backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.myModal {
-    width: 90%; /* 90% of the screen width */
-    height: 90%; /* 90% of the screen height */
-    background-color: #fff; /* White background */
-    border-radius: 10px; /* Rounded corners */
-    padding: 20px; /* Some padding */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
-    position: relative; /* Position relative to the backdrop */
-    overflow: auto; /* Add scrollbars if content overflows */
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  width: 80%;
+  max-width: 500px;
 }
 
 .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background: none;
-    font-size: 2em;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-title {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.modal-images {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
 .modal-image {
-    width: 40%;
-    height: auto;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  object-fit: cover;
+  margin: 5px;
 }
+.modal-description {
+  margin-bottom: 20px;
+}
+
+.modal-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-links a {
+  display: inline-block;
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.modal-links a:hover {
+  background-color: #0056b3;
+}
+
 </style>
