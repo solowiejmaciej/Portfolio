@@ -1,70 +1,81 @@
 <template>
-    <div class="modal">
-      <div class="modal-content">
-        <span class="close-button" @click="$emit('closeModal')">&times;</span>
-        
-        <h2 class="modal-title">{{ title }}</h2>
-        
-        <div class="modal-images">
-          <img class="modal-image" v-for="(image, index) in images" :key="index" :src="image" />
-        </div>
-        
-        <p class="modal-description">{{ description }}</p>
-        
-        <div class="modal-links">
-          <a :href="url" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-          <a v-if="isLive" :href="liveUrl" target="_blank" rel="noopener noreferrer">View Live Site</a>
-        </div>
+  <div class="modal" @click.self="closeModal">
+    <div class="modal-content">
+      <span class="close-button" @click="closeModal">&times;</span>
+
+      <h2 class="modal-title">{{ title }}</h2>
+
+      <div class="modal-images">
+        <img
+          class="modal-image"
+          v-for="(image, index) in images"
+          :key="index"
+          :src="image"
+        />
+      </div>
+
+      <p class="modal-description">{{ description }}</p>
+
+      <div class="modal-links">
+        <a :href="url" target="_blank" rel="noopener noreferrer"
+          >View on GitHub</a
+        >
+        <a
+          v-if="isLive"
+          :href="liveUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          >View Live Site</a
+        >
       </div>
     </div>
-  </template>
+  </div>
+</template>
 
 <script>
 export default {
-
-  emits: ['closeModal'],
+  emits: ["closeModal"],
   props: {
-        description: {
-            type: String,
-            required: true
-        },
-        url: {
-            type: String,
-            required: true
-        },
-        icon : {
-            type: String,
-            required: true
-        },
-        title : {
-            type: String,
-            required: true
-        },
-        isLive: {
-            type: Boolean,
-            required: false,
-            default: false
-        },
-        liveUrl: {
-            type: String,
-            required: false,
-            default: ''
-        },
-        images: {
-            type: Array,
-            required: true,
-        }
+    description: {
+      type: String,
+      required: true,
     },
+    url: {
+      type: String,
+      required: true,
+    },
+    icon: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    isLive: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    liveUrl: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    images: {
+      type: Array,
+      required: true,
+    },
+  },
   methods: {
     closeModal() {
-      this.$emit('closeModal');
-    }
+      this.$emit("closeModal");
+    },
   },
-}
+};
 </script>
 
 <style scoped>
-
 .modal {
   display: flex;
   justify-content: center;
@@ -125,7 +136,7 @@ export default {
 
 .modal-links a {
   display: inline-block;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   padding: 10px 20px;
   border-radius: 4px;
@@ -136,5 +147,4 @@ export default {
 .modal-links a:hover {
   background-color: #0056b3;
 }
-
 </style>
