@@ -29,7 +29,7 @@ const pl = {
     title: "O mnie",
     description:
       "Programista full-stack z doświadczeniem w budowaniu nowoczesnych aplikacji internetowych. Skupiam się na tworzeniu skalowalnych i łatwych w utrzymaniu rozwiązań przy użyciu najnowszych technologii.",
-    image: "me_about.jpg",
+    image: "/me_about.jpg",
   },
   technologies: {
     title: "Technologie i narzędzia",

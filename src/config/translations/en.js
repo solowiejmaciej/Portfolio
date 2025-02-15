@@ -29,7 +29,7 @@ const en = {
     title: "About Me",
     description:
       "Passionate full-stack developer with experience in building modern web applications. I focus on creating scalable and maintainable solutions using cutting-edge technologies.",
-    image: "me_about.jpg",
+    image: "/me_about.jpg",
   },
   technologies: {
     title: "Technologies & Tools",

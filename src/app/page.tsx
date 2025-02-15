@@ -11,6 +11,7 @@ import Footer from "@/components/footer";
 import HeaderControls from "@/components/header-controls";
 import { useLanguage } from "@/contexts/language-context";
 import { Analytics } from "@vercel/analytics/react";
+import Image from "next/image";
 const Layout = () => {
   const { t } = useLanguage();
 
@@ -37,10 +38,12 @@ const Layout = () => {
             <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
               <motion.div whileHover={{ scale: 1.02 }} className="relative">
                 <div className="aspect-square rounded-2xl overflow-hidden">
-                  <img
+                  <Image
                     src={t("about.image")}
                     alt="Profile"
                     className="w-full h-full object-cover"
+                    width={500}
+                    height={500}
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-2xl" />
