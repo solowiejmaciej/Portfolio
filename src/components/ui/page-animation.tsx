@@ -4,7 +4,6 @@ import SQLAnimation from "@/components/ui/sql-animation";
 import config from "@/config";
 import { useSearchParams } from "next/navigation";
 
-// Komponent wewnętrzny z logiką useSearchParams
 const PageAnimationContent = ({ children }) => {
   const [showContent, setShowContent] = useState(false);
   const searchParams = useSearchParams();

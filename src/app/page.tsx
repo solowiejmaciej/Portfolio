@@ -10,12 +10,13 @@ import ExperienceTimeline from "@/components/experience-timeline";
 import Footer from "@/components/footer";
 import HeaderControls from "@/components/header-controls";
 import { useLanguage } from "@/contexts/language-context";
-
+import { Analytics } from "@vercel/analytics/react";
 const Layout = () => {
   const { t } = useLanguage();
 
   return (
     <PageAnimation>
+      <Analytics></Analytics>
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
         {/* Home Section */}
         <HeroSection />
