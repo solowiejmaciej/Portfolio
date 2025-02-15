@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+"use client";
+import React, { useState, useEffect, Suspense } from "react";
 import SQLAnimation from "@/components/ui/sql-animation";
 import config from "@/config";
 import { useSearchParams } from "next/navigation";
 
-const PageAnimation = ({ children }) => {
+// Komponent wewnętrzny z logiką useSearchParams
+const PageAnimationContent = ({ children }) => {
   const [showContent, setShowContent] = useState(false);
   const searchParams = useSearchParams();
   const isBackRequest = searchParams.get("isBackRequest") === "true";
@@ -41,6 +43,21 @@ const PageAnimation = ({ children }) => {
         {children}
       </div>
     </>
+  );
+};
+
+const PageAnimation = ({ children }) => {
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full h-full flex items-center justify-center">
+          {/* Możesz tu dodać loader */}
+          <div>Loading...</div>
+        </div>
+      }
+    >
+      <PageAnimationContent>{children}</PageAnimationContent>
+    </Suspense>
   );
 };
 

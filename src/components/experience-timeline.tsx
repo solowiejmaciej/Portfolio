@@ -14,7 +14,7 @@ const ExperienceTimeline = ({ positions }) => {
     <div className="relative container mx-auto px-6 pt-8">
       <div className="absolute left-8 lg:left-[8.5rem] w-1 h-full bg-gradient-to-b from-[#512bd4] dark:from-[#6d48ff] to-[#512bd4]/20 dark:to-[#6d48ff]/20" />
 
-      {positions.map((position, index) => (
+      {positions.map((position) => (
         <motion.div
           key={position.id}
           initial={{ opacity: 0, x: 50 }}

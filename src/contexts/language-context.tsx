@@ -8,7 +8,11 @@ const translations = {
   pl: pl,
 };
 
-const LanguageContext = createContext();
+const LanguageContext = createContext({
+  language: "pl",
+  setLanguage: () => {},
+  t: (key) => key,
+});
 
 export function LanguageProvider({ children }) {
   const [language, setLanguage] = useState("pl");
