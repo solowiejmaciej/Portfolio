@@ -11,13 +11,15 @@ import Footer from "@/components/footer";
 import HeaderControls from "@/components/header-controls";
 import { useLanguage } from "@/contexts/language-context";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Image from "next/image";
 const Layout = () => {
   const { t } = useLanguage();
 
   return (
     <PageAnimation>
-      <Analytics></Analytics>
+      <Analytics />
+      <SpeedInsights />
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
         {/* Home Section */}
         <HeroSection />
