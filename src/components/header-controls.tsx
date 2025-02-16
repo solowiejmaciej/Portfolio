@@ -21,12 +21,18 @@ const HeaderControls = () => {
       });
 
       if (!response.ok) {
-        console.error("Error tracking CV download:", response.statusText);
+        console.error("Error tracking download");
       }
+
+      const link = document.createElement("a");
+      link.href = "/cv.pdf";
+      link.setAttribute("download", "cv.pdf");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (error) {
-      console.error("Error tracking CV download:", error);
+      console.error("Error downloading CV:", error);
     } finally {
-      window.open("/cv.pdf", "_blank");
       setIsDownloading(false);
     }
   };
@@ -38,9 +44,8 @@ const HeaderControls = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <motion.button
+      <motion.a
         onClick={handleDownloadCV}
-        disabled={isDownloading}
         className={`flex items-center gap-2 px-4 py-2 rounded-xl
                    bg-indigo-600 hover:bg-indigo-700
                    text-white font-medium 
@@ -54,7 +59,7 @@ const HeaderControls = () => {
           className={`w-4 h-4 ${isDownloading ? "animate-spin" : ""}`}
         />
         <span>{t("headers.resume")}</span>
-      </motion.button>
+      </motion.a>
       <LanguageSwitch />
       <ThemeSwitch />
     </motion.div>
