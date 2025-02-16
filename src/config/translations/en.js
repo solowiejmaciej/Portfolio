@@ -129,6 +129,7 @@ const en = {
           ],
         },
         images: ["/dmsMain.png", "/dmsProfile.png"],
+        demo: "https://dms.maciejsolowiej.com/",
       },
       {
         id: 2,
