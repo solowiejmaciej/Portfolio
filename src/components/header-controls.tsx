@@ -21,13 +21,12 @@ const HeaderControls = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        console.error("Error tracking CV download:", response.statusText);
       }
-
-      window.open("/cv.pdf", "_blank");
     } catch (error) {
       console.error("Error tracking CV download:", error);
     } finally {
+      window.open("/cv.pdf", "_blank");
       setIsDownloading(false);
     }
   };
