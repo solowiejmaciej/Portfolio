@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
@@ -9,6 +9,13 @@ import ScrollArrow from "./scroll-arrow";
 import config from "@/config";
 
 const HeroSection = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
   return (
     <section id="home" className="pt-24">
       <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
@@ -19,12 +26,14 @@ const HeroSection = () => {
           className="text-center"
         >
           <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl flex flex-col sm:flex-row items-center justify-center gap-2">
-            <TypeAnimation
-              sequence={config.hero.sequence}
-              wrapper="span"
-              cursor={false}
-              repeat={Infinity}
-            />
+            <div className="h-[40px] sm:h-[48px] md:h-[60px] min-w-[280px] flex items-center justify-center">
+              <TypeAnimation
+                sequence={config.hero.sequence}
+                wrapper="span"
+                cursor={false}
+                repeat={Infinity}
+              />
+            </div>
             <div>
               <span className="text-[#512bd4] dark:text-[#6d48ff]">.NET</span>{" "}
               Developer
