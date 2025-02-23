@@ -194,6 +194,7 @@ const pl = {
         images: ["/elibMain.png", "/elibProfile.png"],
       },
     ],
+    swipeHint: "Przesuń by zobaczyć więcej",
     notFound: "Nie znaleziono projektów",
     goBack: "Wróć",
     overview: "Opis",

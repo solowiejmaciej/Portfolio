@@ -192,6 +192,7 @@ const en = {
         images: ["/elibMain.png", "/elibProfile.png"],
       },
     ],
+    swipeHint: "Swipe to see more",
     notFound: "No projects found",
     goBack: "Go back",
     overview: "Overview",

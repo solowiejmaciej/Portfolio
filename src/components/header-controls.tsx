@@ -1,15 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Download } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Download, Menu } from "lucide-react";
 import ThemeSwitch from "./theme-switch";
 import LanguageSwitch from "./language-switch";
 import { useLanguage } from "@/contexts/language-context";
 
 const HeaderControls = () => {
   const [isDownloading, setIsDownloading] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   const { t } = useLanguage();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowMenu(false);
+      } else if (window.scrollY === 0) {
+        setShowMenu(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleDownloadCV = async () => {
     if (isDownloading) return;
@@ -38,31 +51,33 @@ const HeaderControls = () => {
   };
 
   return (
-    <motion.div
-      className="fixed top-4 right-4 z-50 flex items-center gap-3"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
-      <motion.a
-        onClick={handleDownloadCV}
-        className={`flex items-center gap-2 px-4 py-2 rounded-xl
-                   bg-indigo-600 hover:bg-indigo-700
-                   text-white font-medium 
-                   shadow-[0_2px_10px_rgba(99,102,241,0.3)]
-                   transition-all duration-300
-                   disabled:opacity-75 disabled:cursor-not-allowed`}
-        whileHover={{ scale: isDownloading ? 1 : 1.05 }}
-        whileTap={{ scale: isDownloading ? 1 : 0.95 }}
-      >
-        <Download
-          className={`w-4 h-4 ${isDownloading ? "animate-spin" : ""}`}
-        />
-        <span>{t("headers.resume")}</span>
-      </motion.a>
-      <LanguageSwitch />
-      <ThemeSwitch />
-    </motion.div>
+    <div className="fixed top-4 right-4 z-50">
+      <div className="flex items-center gap-3">
+        {showMenu && (
+          <>
+            <button
+              onClick={handleDownloadCV}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-[0_2px_10px_rgba(99,102,241,0.3)] transition-all duration-300"
+            >
+              <Download
+                className={`w-4 h-4 ${isDownloading ? "animate-spin" : ""}`}
+              />
+              <span>{t("headers.resume")}</span>
+            </button>
+            <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-md rounded-xl">
+              <LanguageSwitch />
+            </div>
+            <ThemeSwitch />
+          </>
+        )}
+        <button
+          onClick={() => setShowMenu(!showMenu)}
+          className="p-2 rounded-xl bg-white/30 dark:bg-gray-800/30 backdrop-blur-md hover:bg-white/50 dark:hover:bg-gray-800/50 text-gray-800 dark:text-white"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+      </div>
+    </div>
   );
 };
 

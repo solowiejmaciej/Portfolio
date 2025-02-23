@@ -9,6 +9,7 @@ import { useLanguage } from "@/contexts/language-context";
 const FeaturedProjects = ({ projects }) => {
   const [activeProject, setActiveProject] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [showSwipeHint, setShowSwipeHint] = useState(true);
   const router = useRouter();
   const { t } = useLanguage();
 
@@ -46,22 +47,20 @@ const FeaturedProjects = ({ projects }) => {
   };
 
   const NavigationArrow = ({ direction, onClick }) => (
-    <motion.button
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+    <button
       onClick={onClick}
       className={`absolute top-1/2 -translate-y-1/2 ${
-        direction === "left" ? "left-4" : "right-4"
-      } z-10 p-3 rounded-full bg-white/80 dark:bg-gray-800/80 text-gray-800 dark:text-white 
+        direction === "left" ? "left-6 md:left-4" : "right-6 md:right-4"
+      } z-10 p-3 md:p-4 rounded-full bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-white 
         hover:bg-[#512bd4] hover:text-white dark:hover:bg-[#6d48ff] transition-all duration-200
-        backdrop-blur-sm`}
+        shadow-lg backdrop-blur-sm border border-gray-200 dark:border-gray-700`}
     >
       {direction === "left" ? (
-        <ChevronLeft className="w-6 h-6" />
+        <ChevronLeft className="w-5 h-5 md:w-7 md:h-7" />
       ) : (
-        <ChevronRight className="w-6 h-6" />
+        <ChevronRight className="w-5 h-5 md:w-7 md:h-7" />
       )}
-    </motion.button>
+    </button>
   );
 
   return (
@@ -79,9 +78,68 @@ const FeaturedProjects = ({ projects }) => {
           <div className="h-1 w-20 bg-[#512bd4] dark:bg-[#6d48ff] mx-auto rounded-full mb-8" />
         </motion.div>
 
-        <div className="relative h-[600px] overflow-hidden">
-          <NavigationArrow direction="left" onClick={() => paginate(-1)} />
-          <NavigationArrow direction="right" onClick={() => paginate(1)} />
+        <div className="relative h-[600px] md:h-[600px] overflow-hidden">
+          <div className="hidden md:block">
+            <NavigationArrow direction="left" onClick={() => paginate(-1)} />
+            <NavigationArrow direction="right" onClick={() => paginate(1)} />
+          </div>
+
+          {/* Swipe Indicator - Mobile Only */}
+          {showSwipeHint && (
+            <motion.div
+              className="md:hidden absolute inset-0 z-20 pointer-events-none"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center"
+                animate={{
+                  x: [-30, 30, -30],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: 2,
+                  ease: "easeInOut",
+                  onComplete: () => setShowSwipeHint(false),
+                }}
+              >
+                <div className="flex flex-col items-center gap-2">
+                  <motion.div
+                    className="w-12 h-12 rounded-full bg-white/20 dark:bg-gray-800/20 backdrop-blur-sm flex items-center justify-center"
+                    animate={{
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: 2,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="text-gray-600 dark:text-gray-300"
+                    >
+                      <path
+                        d="M14 5L21 12M21 12L14 19M21 12H3"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </motion.div>
+                  <span className="text-sm text-gray-600 dark:text-gray-300 bg-white/80 dark:bg-gray-800/80 px-3 py-1 rounded-full backdrop-blur-sm">
+                    {t("projects.swipeHint")}
+                  </span>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
 
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
@@ -108,9 +166,9 @@ const FeaturedProjects = ({ projects }) => {
               }}
               className="absolute w-full h-full"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 h-full">
                 <div
-                  className="relative overflow-hidden rounded-xl cursor-pointer"
+                  className="h-[300px] md:h-full relative overflow-hidden rounded-xl cursor-pointer"
                   onClick={handleViewProject}
                 >
                   <img
@@ -144,12 +202,12 @@ const FeaturedProjects = ({ projects }) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="flex flex-wrap gap-2 mb-8"
+                    className="flex flex-wrap gap-2 mb-6"
                   >
                     {projects[activeProject].tags.map((tag, index) => (
                       <span
                         key={index}
-                        className="px-4 py-2 bg-[#512bd4]/10 dark:bg-[#6d48ff]/20 text-[#512bd4] dark:text-[#6d48ff] rounded-full text-sm"
+                        className="px-3 py-1.5 bg-[#512bd4]/10 dark:bg-[#6d48ff]/20 text-[#512bd4] dark:text-[#6d48ff] rounded-full text-xs font-medium"
                       >
                         {tag}
                       </span>
